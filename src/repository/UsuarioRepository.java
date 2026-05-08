@@ -24,13 +24,7 @@ public class UsuarioRepository {
             ps.setString(2, usuario.getCpf());
             ps.setString(3, usuario.getEmail());
             ps.setString(4, usuario.getSenha());
-            // ps.setDate(5, new java.sql.Date(usuario.getDataCriacao().getTime()));//Revisar
-            if (usuario.getDataCriacao() != null) {
-                ps.setDate(5, Date.valueOf(usuario.getDataCriacao()));
-            } else {
-                ps.setNull(5, java.sql.Types.DATE);
-            }
-            
+            ps.setDate(5, usuario.getDataCriacao() != null ? java.sql.Date.valueOf(usuario.getDataCriacao()) : null);// Converte LocalDate para java.sql.Date, ou seta null se dataCriacao for null
             ps.setBoolean(6, usuario.getAtivo());
 
             ps.execute();

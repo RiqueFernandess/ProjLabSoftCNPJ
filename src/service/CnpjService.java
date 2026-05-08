@@ -1,50 +1,70 @@
 package service;
 
 import model.Empresa;
-import java.net.*;
+import util.CnpjValidator;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Scanner;
 
 public class CnpjService {
 
     public Empresa buscar(String cnpj) {
 
+        cnpj = cnpj.replaceAll("[^0-9]", "");
+
+        //REGRA 5
+        if (!CnpjValidator.validar(cnpj)) {
+            System.out.println("CNPJ inválido.");
+            return null;
+        }
+
         try {
             URL url = new URL("https://www.receitaws.com.br/v1/cnpj/" + cnpj);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("User-Agent", "Mozilla/5.0");
 
-            conn.setConnectTimeout(5000);
-            conn.setReadTimeout(5000);
-
-            int codResposta = conn.getResponseCode();
-
-            if(codResposta == 429) {
-                System.out.println("Limite de consultas atigindo, aguarde 1 minuto");
-                return null;
-            }
-
-            if(codResposta != 200) {
-                System.out.println("Erro na consulta. Código HTTP: " + codResposta);
-            }
-
             Scanner sc = new Scanner(conn.getInputStream(), "UTF-8");
+
             String json = "";
-
-            while (sc.hasNext()) json += sc.nextLine();
-            sc.close();
-
-            if(json.isEmpty()) {
-                System.out.println("Sem resposta da API");
-                return null;
+            while (sc.hasNext()) {
+                json += sc.nextLine();
             }
+
+            sc.close();
 
             String nome = extrair(json, "\"nome\": \"");
             String situacao = extrair(json, "\"situacao\": \"");
+            String tipoEmpresa = extrair(json, "\"tipo\": \"");
+            String municipio = extrair(json, "\"municipio\": \"");
+            String dataAberturaStr = extrair(json, "\"abertura\": \"");
+            
+            // "data_situacao" na ReceitaWS costuma indicar a data da baixa se a situação for BAIXADA.
+            String dataSituacaoStr = extrair(json, "\"data_situacao\": \"");
 
-            return new Empresa(cnpj, nome, situacao);
+            // REGRA B
+            if (nome.equals("N/A") || nome.equals("null")) {
+                return null;
+            }
+
+            LocalDate dataAbertura = parseDate(dataAberturaStr);
+            LocalDate dataEncerramento = null;
+            
+            if ("BAIXADA".equalsIgnoreCase(situacao)) {
+                dataEncerramento = parseDate(dataSituacaoStr);
+            }
+
+            return new Empresa(cnpj, nome, tipoEmpresa, municipio, dataAbertura, dataEncerramento, situacao);//Revisar construtor
 
         } catch (Exception e) {
+            System.out.println("Erro ao consultar API.");
             return null;
         }
     }
@@ -55,6 +75,15 @@ public class CnpjService {
             return json.substring(i, json.indexOf("\"", i));
         } catch (Exception e) {
             return "N/A";
+        }
+    }
+
+    private LocalDate parseDate(String dateStr) {
+        if (dateStr == null || dateStr.equals("N/A") || dateStr.trim().isEmpty()) return null;
+        try {
+            return LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (Exception e) {
+            return null;
         }
     }
 }

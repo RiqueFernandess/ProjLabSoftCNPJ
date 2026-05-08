@@ -12,7 +12,7 @@ public class EmpresaRepository {
     public void salvar(Empresa empresa) {
 
         String sql =
-            "INSERT INTO empresa (cnpj, nome, situacao) VALUES (?, ?, ?)";
+            "INSERT INTO empresa (cnpj, nome, tipoEmpresa, municipio, dataAbertura, dataEncerramento, situacao) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (
             Connection conn = ConnectionFactory.getConnection();
@@ -21,7 +21,11 @@ public class EmpresaRepository {
 
             ps.setString(1, empresa.getCnpj());
             ps.setString(2, empresa.getNome());
-            ps.setString(3, empresa.getSituacao());
+            ps.setString(3, empresa.getTipoEmpresa());
+            ps.setString(4, empresa.getMunicipio());
+            ps.setDate(5, empresa.getDataAbertura() != null ? java.sql.Date.valueOf(empresa.getDataAbertura()) : null);
+            ps.setDate(6, empresa.getDataEncerramento() != null ? java.sql.Date.valueOf(empresa.getDataEncerramento()) : null);
+            ps.setString(7, empresa.getSituacao());
 
             ps.execute();
 
@@ -44,6 +48,10 @@ public class EmpresaRepository {
                 System.out.println(
                     rs.getString("cnpj") + " - " +
                     rs.getString("nome") + " - " +
+                    rs.getString("tipoEmpresa") + " - " +
+                    rs.getString("municipio") + " - " +
+                    rs.getDate("dataAbertura") + " - " +
+                    rs.getDate("dataEncerramento") + " - " +
                     rs.getString("situacao")
                 );
             }
