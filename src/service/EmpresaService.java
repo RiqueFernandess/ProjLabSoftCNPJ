@@ -1,6 +1,6 @@
 package service;
 
-import model.Empresa;
+import model.EmpresaModel;
 import util.CnpjValidator;
 
 import java.net.HttpURLConnection;
@@ -9,13 +9,9 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Scanner;
+public class EmpresaService {
 
-public class CnpjService {
-
-    public Empresa buscar(String cnpj) {
+    public EmpresaModel buscar(String cnpj) {
 
         cnpj = cnpj.replaceAll("[^0-9]", "");
 
@@ -61,7 +57,7 @@ public class CnpjService {
                 dataEncerramento = parseDate(dataSituacaoStr);
             }
 
-            return new Empresa(cnpj, nome, tipoEmpresa, municipio, dataAbertura, dataEncerramento, situacao);//Revisar construtor
+            return new EmpresaModel(cnpj, nome, tipoEmpresa, municipio, dataAbertura, dataEncerramento, situacao);//Revisar construtor
 
         } catch (Exception e) {
             System.out.println("Erro ao consultar API.");

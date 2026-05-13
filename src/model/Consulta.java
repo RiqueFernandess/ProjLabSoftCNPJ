@@ -4,30 +4,71 @@ import java.time.LocalDate;
 
 public class Consulta {
 
-    private int idConsulta;
-    private int idUsuario;
-    private int idEmpresa;
+    private Integer idConsulta;
+    private Integer idUsuario;
+    private Integer idEmpresa;
     private LocalDate dataHora;
     private boolean sucesso;
     private String msgErro;
     private int tempoRespostaMs;
 
-    public Consulta(int idConsulta, int idUsuario, int idEmpresa, LocalDate dataHora, boolean sucesso, String msgErro, int tempoRespostaMs) {
+    public Consulta(){}
+
+    public Consulta(Integer idUsuario, Integer idEmpresa, LocalDate dataHora, Boolean sucesso, String msgErro, Integer tempoRespostaMs) {
+       this.idUsuario = idUsuario;
+       this.idEmpresa = idEmpresa;
+       this.dataHora = dataHora;
+       this.sucesso = sucesso;
+       this.msgErro = msgErro;
+       this.tempoRespostaMs = tempoRespostaMs;
+    }
+    
+    public Consulta(Integer idConsulta, Integer idUsuario, Integer idEmpresa, LocalDate dataHora, Boolean sucesso, String msgErro, Integer tempoRespostaMs) {
+       this.idConsulta = idConsulta;
+       this.idUsuario = idUsuario;
+       this.idEmpresa = idEmpresa;
+       this.dataHora = dataHora;
+       this.sucesso = sucesso;
+       this.msgErro = msgErro;
+       this.tempoRespostaMs = tempoRespostaMs;
+    }
+
+    public Integer getIdConsulta() { return idConsulta; }
+    public Integer getIdUsuario() { return idUsuario; }
+    public Integer getIdEmpresa() { return idEmpresa; }
+    public LocalDate getDataHora() { return dataHora; }
+    public Boolean isSucesso() { return sucesso; }
+    public String getMsgErro() { return msgErro; }
+    public Integer getTempoRespostaMs() { return tempoRespostaMs; }
+
+    public void setIdConsulta(Integer idConsulta) {
         this.idConsulta = idConsulta;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public void setIdEmpresa(Integer idEmpresa) {
         this.idEmpresa = idEmpresa;
+    }
+
+    public void setDataHora(LocalDate dataHora) {
         this.dataHora = dataHora;
+    }
+
+    public void setSucesso(Boolean sucesso) {
         this.sucesso = sucesso;
+    }
+
+    public void setMsgErro(String msgErro) {
         this.msgErro = msgErro;
+    }
+
+    public void setTempoRespostaMs(Integer tempoRespostaMs) {
         this.tempoRespostaMs = tempoRespostaMs;
     }
 
-    public int getIdConsulta() { return idConsulta; }
-    public int getIdUsuario() { return idUsuario; }
-    public int getIdEmpresa() { return idEmpresa; }
-    public LocalDate getDataHora() { return dataHora; }
-    public boolean isSucesso() { return sucesso; }
-    public String getMsgErro() { return msgErro; }
-    public int getTempoRespostaMs() { return tempoRespostaMs; }
+    
 
 }

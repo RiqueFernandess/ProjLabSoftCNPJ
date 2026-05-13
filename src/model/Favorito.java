@@ -4,14 +4,14 @@ import java.time.LocalDate;
 
 public class Favorito {
 
-  private int idFavorito;
-  private int idUsuario;
-  private int idEmpresa;
-  private int idCategoria;
+  private Integer idFavorito;
+  private Integer idUsuario;
+  private Integer idEmpresa;
+  private Integer idCategoria;
   private String nomeFavorito;
   private LocalDate dataCriacao;
 
-  public Favorito(int idFavorito, int idUsuario, int idEmpresa, int idCategoria, String nomeFavorito, LocalDate dataCriacao) {
+  public Favorito(Integer idFavorito, Integer idUsuario, Integer idEmpresa, Integer idCategoria, String nomeFavorito, LocalDate dataCriacao) {
     this.idFavorito = idFavorito;
     this.idUsuario = idUsuario;
     this.idEmpresa = idEmpresa;

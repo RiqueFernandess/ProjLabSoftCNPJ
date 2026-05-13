@@ -4,13 +4,13 @@ import java.time.LocalDate;
 
 public class Categoria {
     
-    private int idCategoria;
-    private int idUsuario;
+    private Integer idCategoria;
+    private Integer idUsuario;
     private String nome;
     private String descricao;
     private LocalDate dataCriacao;
 
-    public Categoria(int idCategoria, int idUsuario, String nome, String descricao, LocalDate dataCriacao) {
+    public Categoria(Integer idCategoria, Integer idUsuario, String nome, String descricao, LocalDate dataCriacao) {
         this.idCategoria = idCategoria;
         this.idUsuario = idUsuario;
         this.nome = nome;
