@@ -51,7 +51,7 @@ public class EmpresaRepository {
                 empresa.setIdEmpresa(rs.getInt("id_empresa"));
                 empresa.setCnpj(rs.getString("cnpj"));
                 empresa.setNome(rs.getString("nome"));
-                empresa.setTipoEmpresa(rs.getString("cnpj"));
+                empresa.setTipoEmpresa(rs.getString("tipo_empresa"));
                 empresa.setMunicipio(rs.getString("municipio"));
                 empresa.setDataAbertura(
                     rs.getDate("data_abertura") != null
