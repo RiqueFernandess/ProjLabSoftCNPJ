@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Scanner;
 
-import repository.Repository;
+import repository.EmpresaRepository;
 import service.CnpjService;
 import model.Empresa;
 
@@ -12,7 +12,7 @@ public class MainCnpj {
         Scanner sc = new Scanner(System.in);
 
         CnpjService service = new CnpjService();
-        Repository<Empresa> repo = new Repository<>();
+        EmpresaRepository repo = new EmpresaRepository();
 
         String ultimoCNPJ = "";
         int num_de_consulta = 0;
@@ -145,9 +145,7 @@ public class MainCnpj {
 
                 int contador = 1;
 
-                for (int i = lista.size() - 1; i >= 0; i--) {
-
-                    Empresa e = lista.get(i);
+                for (Empresa e : lista) {
 
                     System.out.println(
                         contador
@@ -164,49 +162,29 @@ public class MainCnpj {
 
             } else if (op == 3) {
 
-                System.out.print("Digite o nome ou CNPJ: ");
+                System.out.print("Digite o CNPJ: ");
 
                 String busca = sc.nextLine().trim();
 
                 String buscaCnpj = busca.replaceAll("\\D", "");
 
-                boolean encontrado = false;
+                if (buscaCnpj.isEmpty()) {
 
-                for (Empresa e : repo.listar()) {
-
-                    // BUSCA POR CNPJ
-                    if (
-                        buscaCnpj.length() >= 3 &&
-                        e.getCnpj().contains(buscaCnpj)
-                    ) {
-
-                        System.out.println(
-                            e.getCnpj()
-                            + " - "
-                            + e.getNome()
-                        );
-
-                        encontrado = true;
-                    }
-
-                    // BUSCA POR NOME
-                    else if (
-                        e.getNome()
-                        .toLowerCase()
-                        .contains(busca.toLowerCase())
-                    ) {
-
-                        System.out.println(
-                            e.getCnpj()
-                            + " - "
-                            + e.getNome()
-                        );
-
-                        encontrado = true;
-                    }
+                    System.out.println("Digite um CNPJ válido.");
+                    continue;
                 }
 
-                if (!encontrado) {
+                Empresa empresa = repo.buscarPorCnpj(buscaCnpj);
+
+                if (empresa != null) {
+
+                    System.out.println(
+                        empresa.getCnpj()
+                        + " - "
+                        + empresa.getNome()
+                    );
+
+                } else {
 
                     System.out.println("Nenhuma empresa encontrada.");
                 }
@@ -251,7 +229,9 @@ public class MainCnpj {
 
                 if (index > 0 && index <= lista.size()) {
 
-                    Empresa removida = lista.remove(index - 1);
+                    Empresa removida = lista.get(index - 1);
+
+                    repo.remover(removida.getIdEmpresa());
 
                     System.out.println(
                         "Empresa removida: "

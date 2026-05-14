@@ -61,8 +61,8 @@ public class CnpjService {
                 dataEncerramento = parseDate(dataSituacaoStr);
             }
 
-            return new Empresa(cnpj, nome, tipoEmpresa, municipio, dataAbertura, dataEncerramento, situacao);//Revisar construtor
-
+        return new Empresa(0, cnpj,nome,tipoEmpresa,municipio,dataAbertura,dataEncerramento,situacao);
+        
         } catch (Exception e) {
             System.out.println("Erro ao consultar API.");
             return null;
