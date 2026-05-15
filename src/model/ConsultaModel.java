@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-public class Consulta {
+public class ConsultaModel {
 
     private Integer idConsulta;
     private Integer idUsuario;
@@ -12,9 +12,9 @@ public class Consulta {
     private String msgErro;
     private int tempoRespostaMs;
 
-    public Consulta(){}
+    public ConsultaModel(){}
 
-    public Consulta(Integer idUsuario, Integer idEmpresa, LocalDate dataHora, Boolean sucesso, String msgErro, Integer tempoRespostaMs) {
+    public ConsultaModel(Integer idUsuario, Integer idEmpresa, LocalDate dataHora, Boolean sucesso, String msgErro, Integer tempoRespostaMs) {
        this.idUsuario = idUsuario;
        this.idEmpresa = idEmpresa;
        this.dataHora = dataHora;
@@ -23,7 +23,7 @@ public class Consulta {
        this.tempoRespostaMs = tempoRespostaMs;
     }
     
-    public Consulta(Integer idConsulta, Integer idUsuario, Integer idEmpresa, LocalDate dataHora, Boolean sucesso, String msgErro, Integer tempoRespostaMs) {
+    public ConsultaModel(Integer idConsulta, Integer idUsuario, Integer idEmpresa, LocalDate dataHora, Boolean sucesso, String msgErro, Integer tempoRespostaMs) {
        this.idConsulta = idConsulta;
        this.idUsuario = idUsuario;
        this.idEmpresa = idEmpresa;

@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-public class Usuario {
+public class UsuarioModel {
     
     private Integer idUsuario;
     private String nome;
@@ -12,9 +12,9 @@ public class Usuario {
     private LocalDate dataCriacao;
     private Boolean ativo;
 
-    public Usuario(){}
+    public UsuarioModel(){}
 
-    public Usuario(String nome, String cpf, String email, String senha, LocalDate dataCriacao, Boolean ativo) {
+    public UsuarioModel(String nome, String cpf, String email, String senha, LocalDate dataCriacao, Boolean ativo) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
@@ -23,7 +23,7 @@ public class Usuario {
         this.ativo = ativo;
     }
 
-    public Usuario(Integer idUsuario, String nome, String cpf, String email, String senha, LocalDate dataCriacao, Boolean ativo) {
+    public UsuarioModel(Integer idUsuario, String nome, String cpf, String email, String senha, LocalDate dataCriacao, Boolean ativo) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.cpf = cpf;
