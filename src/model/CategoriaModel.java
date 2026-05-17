@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-public class Categoria {
+public class CategoriaModel {
     
     private Integer idCategoria;
     private Integer idUsuario;
@@ -10,16 +10,16 @@ public class Categoria {
     private String descricao;
     private LocalDate dataCriacao;
 
-    public Categoria(){}
+    public CategoriaModel(){}
     
-    public Categoria(Integer idUsuario, String nome, String descricao, LocalDate dataCriacao) {
+    public CategoriaModel(Integer idUsuario, String nome, String descricao, LocalDate dataCriacao) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.descricao = descricao;
         this.dataCriacao = dataCriacao;
     }
     
-    public Categoria(Integer idCategoria, Integer idUsuario, String nome, String descricao, LocalDate dataCriacao) {
+    public CategoriaModel(Integer idCategoria, Integer idUsuario, String nome, String descricao, LocalDate dataCriacao) {
         this.idCategoria = idCategoria;
         this.idUsuario = idUsuario;
         this.nome = nome;

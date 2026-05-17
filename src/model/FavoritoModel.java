@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-public class Favorito {
+public class FavoritoModel {
 
   private Integer idFavorito;
   private Integer idUsuario;
@@ -11,9 +11,9 @@ public class Favorito {
   private String nomeFavorito;
   private LocalDate dataCriacao;
 
-  public Favorito(){}
+  public FavoritoModel(){}
 
-  public Favorito(Integer idUsuario, Integer idEmpresa, Integer idCategoria, String nomeFavorito, LocalDate dataCriacao) {
+  public FavoritoModel(Integer idUsuario, Integer idEmpresa, Integer idCategoria, String nomeFavorito, LocalDate dataCriacao) {
     this.idUsuario = idUsuario;
     this.idEmpresa = idEmpresa;
     this.idCategoria = idCategoria;
@@ -21,7 +21,7 @@ public class Favorito {
     this.dataCriacao = dataCriacao;
   }
 
-  public Favorito(Integer idFavorito, Integer idUsuario, Integer idEmpresa, Integer idCategoria, String nomeFavorito, LocalDate dataCriacao) {
+  public FavoritoModel(Integer idFavorito, Integer idUsuario, Integer idEmpresa, Integer idCategoria, String nomeFavorito, LocalDate dataCriacao) {
     this.idFavorito = idFavorito;
     this.idUsuario = idUsuario;
     this.idEmpresa = idEmpresa;

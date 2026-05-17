@@ -7,47 +7,48 @@ import java.util.Scanner;
 public class AuthController {
 
     private final UsuarioService usuarioService;
-
     private final Scanner sc;
 
-    public AuthController() {
-
-        usuarioService = new UsuarioService();
-
-        sc = new Scanner(System.in);
+    public AuthController(
+            UsuarioService usuarioService,
+            Scanner sc
+    ) {
+        this.usuarioService = usuarioService;
+        this.sc = sc;
     }
 
-    public void iniciar() {
+    public void cadastrar() {
 
-        while (true) {
+        try {
 
-            System.out.println("\n=== LOGIN ===");
+            System.out.print("Nome: ");
+            String nome = sc.nextLine();
 
-            System.out.println("1 - Cadastrar");
-            System.out.println("2 - Login");
-            System.out.println("0 - Sair");
+            System.out.print("CPF: ");
+            String cpf = sc.nextLine();
 
-            int op =
-                    Integer.parseInt(sc.nextLine());
+            System.out.print("Email: ");
+            String email = sc.nextLine();
 
-            switch (op) {
+            System.out.print("Senha: ");
+            String senha = sc.nextLine();
 
-                case 1 -> cadastrar();
+            usuarioService.cadastrar(
+                    nome,
+                    cpf,
+                    email,
+                    senha
+            );
 
-                case 2 -> login();
+            System.out.println("Usuário cadastrado com sucesso");
 
-                case 0 -> System.exit(0);
-            }
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
         }
     }
 
-    private void cadastrar() {
-
-        System.out.print("Nome: ");
-        String nome = sc.nextLine();
-
-        System.out.print("CPF: ");
-        String cpf = sc.nextLine();
+    public boolean login() {
 
         System.out.print("Email: ");
         String email = sc.nextLine();
@@ -55,36 +56,13 @@ public class AuthController {
         System.out.print("Senha: ");
         String senha = sc.nextLine();
 
-        usuarioService.cadastrar(
-                nome,
-                cpf,
-                email,
-                senha
-        );
-
-        System.out.println(
-                "Usuário cadastrado com sucesso"
-        );
-    }
-
-    private void login() {
-
-        System.out.print("Email: ");
-        String email = sc.nextLine();
-
-        System.out.print("Senha: ");
-        String senha = sc.nextLine();
-
-        boolean sucesso =
-                usuarioService.login(email, senha);
+        boolean sucesso = usuarioService.login(email, senha);
 
         if (!sucesso) {
 
-            System.out.println(
-                    "Login inválido"
-            );
+            System.out.println("Login inválido");
 
-            return;
+            return false;
         }
 
         System.out.println(
@@ -94,44 +72,13 @@ public class AuthController {
                         .getNome()
         );
 
-        menuSistema();
+        return true;
     }
 
-    private void menuSistema() {
+    public void logout() {
 
-        while (usuarioService.estaLogado()) {
+        usuarioService.logout();
 
-            System.out.println("\n=== SISTEMA ===");
-
-            System.out.println(
-                    "1 - Consultar empresa"
-            );
-
-            System.out.println(
-                    "2 - Logout"
-            );
-
-            int op =
-                    Integer.parseInt(sc.nextLine());
-
-            switch (op) {
-
-                case 1 -> {
-
-                    System.out.println(
-                            "Consulta de empresa aqui"
-                    );
-                }
-
-                case 2 -> {
-
-                    usuarioService.logout();
-
-                    System.out.println(
-                            "Logout realizado"
-                    );
-                }
-            }
-        }
+        System.out.println("Logout realizado");
     }
 }
