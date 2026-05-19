@@ -1,20 +1,20 @@
 package model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ConsultaModel {
 
     private Integer idConsulta;
     private Integer idUsuario;
     private Integer idEmpresa;
-    private LocalDate dataHora;
+    private LocalDateTime dataHora;
     private boolean sucesso;
     private String msgErro;
     private int tempoRespostaMs;
 
     public ConsultaModel(){}
 
-    public ConsultaModel(Integer idUsuario, Integer idEmpresa, LocalDate dataHora, Boolean sucesso, String msgErro, Integer tempoRespostaMs) {
+    public ConsultaModel(Integer idUsuario, Integer idEmpresa, LocalDateTime dataHora, Boolean sucesso, String msgErro, Integer tempoRespostaMs) {
        this.idUsuario = idUsuario;
        this.idEmpresa = idEmpresa;
        this.dataHora = dataHora;
@@ -23,7 +23,7 @@ public class ConsultaModel {
        this.tempoRespostaMs = tempoRespostaMs;
     }
     
-    public ConsultaModel(Integer idConsulta, Integer idUsuario, Integer idEmpresa, LocalDate dataHora, Boolean sucesso, String msgErro, Integer tempoRespostaMs) {
+    public ConsultaModel(Integer idConsulta, Integer idUsuario, Integer idEmpresa, LocalDateTime dataHora, Boolean sucesso, String msgErro, Integer tempoRespostaMs) {
        this.idConsulta = idConsulta;
        this.idUsuario = idUsuario;
        this.idEmpresa = idEmpresa;
@@ -36,7 +36,7 @@ public class ConsultaModel {
     public Integer getIdConsulta() { return idConsulta; }
     public Integer getIdUsuario() { return idUsuario; }
     public Integer getIdEmpresa() { return idEmpresa; }
-    public LocalDate getDataHora() { return dataHora; }
+    public LocalDateTime getDataHora() { return dataHora; }
     public Boolean isSucesso() { return sucesso; }
     public String getMsgErro() { return msgErro; }
     public Integer getTempoRespostaMs() { return tempoRespostaMs; }
@@ -53,7 +53,7 @@ public class ConsultaModel {
         this.idEmpresa = idEmpresa;
     }
 
-    public void setDataHora(LocalDate dataHora) {
+    public void setDataHora(LocalDateTime dataHora) {
         this.dataHora = dataHora;
     }
 
