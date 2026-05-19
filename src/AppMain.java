@@ -1,6 +1,7 @@
 import controller.AuthController;
 import controller.ConsultaController;
 import controller.EmpresaController;
+import controller.EstatisticaController;
 import controller.SistemaController;
 import service.ConsultaService;
 import service.EmpresaService;
@@ -21,12 +22,14 @@ public class AppMain {
         AuthController authController = new AuthController(usuarioService, sc);
         EmpresaController empresaController = new EmpresaController(sc, empresaService, consultaService, usuarioService);
         ConsultaController consultaController = new ConsultaController(consultaService, usuarioService);
+        EstatisticaController estatisticaController = new EstatisticaController(sc, usuarioService);
 
         // Controlador Central do Sistema
         SistemaController sistemaController = new SistemaController(
                 authController, 
                 empresaController, 
-                consultaController, 
+                consultaController,
+                estatisticaController, 
                 usuarioService, 
                 sc
         );

@@ -132,4 +132,5 @@ public class ConsultaRepository {
         }
         return lista;
     }
+
 }

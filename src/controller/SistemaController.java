@@ -8,14 +8,17 @@ public class SistemaController {
     private final AuthController authController;
     private final EmpresaController empresaController;
     private final ConsultaController consultaController;
+    private final EstatisticaController estatisticaController;
     private final UsuarioService usuarioService;
     private final Scanner sc;
 
     public SistemaController(AuthController authController, EmpresaController empresaController, 
-                             ConsultaController consultaController, UsuarioService usuarioService, Scanner sc) {
+                             ConsultaController consultaController, EstatisticaController estatisticaController,
+                             UsuarioService usuarioService, Scanner sc) {
         this.authController = authController;
         this.empresaController = empresaController;
         this.consultaController = consultaController;
+        this.estatisticaController = estatisticaController;
         this.usuarioService = usuarioService;
         this.sc = sc;
     }
@@ -31,14 +34,14 @@ public class SistemaController {
     }
 
     private void menuAutenticacao() {
-        System.out.print("""
-                
+        System.out.print("""   
                 === LOGIN ===
                 1 - Cadastrar
                 2 - Login
                 0 - Sair
                 
-                Escolha uma opção:\s""");
+                Escolha uma opção:\s"""
+            );
 
         String entrada = sc.nextLine();
         if (!entrada.matches("\\d+")) {
@@ -57,19 +60,20 @@ public class SistemaController {
 
     private void menuSistema() {
         empresaController.exibirCabecalho();
-        System.out.print("""
-                
+        System.out.print("""    
                 1 - Consultar CNPJ
                 2 - Listar empresas
                 3 - Buscar empresa
                 4 - Remover empresa
-                5 - Logout
-                6 - Minhas consultas
-                7 - Consultas com erro
-                8 - Empresas consultadas
+                5 - Minhas consultas
+                6 - Consultas com erro
+                7 - Empresas consultadas
+                8 - Estatísticas
+                9 - Logout
                 0 - Sair
                 
-                Escolha uma opção:\s""");
+                Escolha uma opção:\s"""
+        );
 
         String entrada = sc.nextLine();
         if (!entrada.matches("\\d+")) {
@@ -83,10 +87,11 @@ public class SistemaController {
             case 2 -> empresaController.listarEmpresas();
             case 3 -> empresaController.buscarEmpresa();
             case 4 -> empresaController.removerEmpresa();
-            case 5 -> authController.logout();
-            case 6 -> consultaController.listarUltimasConsultas();
-            case 7 -> consultaController.listarConsultasComErro();
-            case 8 -> consultaController.listarEmpresasConsultadas();
+            case 5 -> consultaController.listarUltimasConsultas();
+            case 6 -> consultaController.listarConsultasComErro();
+            case 7 -> consultaController.listarEmpresasConsultadas();
+            case 8 -> estatisticaController.menuEstatisticas();
+            case 9 -> authController.logout();
             case 0 -> System.exit(0);
             default -> System.out.println("Opção inválida");
         }

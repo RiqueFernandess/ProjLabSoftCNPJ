@@ -59,4 +59,5 @@ public class ConsultaService {
     public int getNumeroConsultas() {
         return numeroConsultas;
     }
+    
 }

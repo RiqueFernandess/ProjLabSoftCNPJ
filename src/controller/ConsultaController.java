@@ -76,4 +76,5 @@ public class ConsultaController {
             System.out.println(contador++ + " - " + e.getCnpj() + " - " + e.getNome());
         }
     }
+
 }
