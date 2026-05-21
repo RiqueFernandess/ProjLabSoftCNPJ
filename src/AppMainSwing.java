@@ -2,7 +2,7 @@ import view.LoginFrame;
 
 import javax.swing.*;
 
-public class AppMain {
+public class AppMainSwing {
 
     public static void main(String[] args) {
 
