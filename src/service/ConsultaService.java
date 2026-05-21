@@ -59,5 +59,24 @@ public class ConsultaService {
     public int getNumeroConsultas() {
         return numeroConsultas;
     }
+
+    public void registrarConsultaCompleta(
+        Integer idUsuario,
+        Integer idEmpresa,
+        boolean sucesso,
+        String msgErro,
+        long inicio
+    ) {
+
+    int tempoResposta = (int)(System.currentTimeMillis() - inicio);
+    registrarConsulta(
+            idUsuario,
+            idEmpresa,
+            sucesso,
+            msgErro,
+            tempoResposta
+    );
+
+}
     
 }
